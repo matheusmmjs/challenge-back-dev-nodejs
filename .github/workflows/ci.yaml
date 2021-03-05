@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.go }}
-      #- run: go test -coverprofile=coverage.out
+      #- run:  -coverprofile=coverage.out
       #- run: go run math.go
 
       #- name: SonarCloud Scan
