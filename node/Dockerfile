@@ -15,4 +15,8 @@ RUN yarn add typescript -D \
   && yarn add ts-node-dev -D \
   && yarn add tsconfig-paths -D \
   && yarn add eslint -D \
-  && yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
+  && yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D \
+  && yarn add jest -D \
+  && yarn add ts-jest -D \
+  && yarn add @types/jest -D
+
