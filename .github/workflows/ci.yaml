@@ -9,20 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14.16.0', '15.11.0']
+        node: ["14.16.0", "15.11.0"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.go }}
-      #- run:  -coverprofile=coverage.out
-      #- run: go run math.go
+      - run: yarn test
+      - run: yarn dev
 
-      #- name: SonarCloud Scan
-      #  uses: SonarSource/sonarcloud-github-action@master
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
