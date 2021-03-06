@@ -1,7 +1,7 @@
 import { User } from '@models/User';
 
 export class UsersController {
-  test() {
-    const user = new User();
+  test(a: number, b: number): number {
+    return a + b;
   }
 }

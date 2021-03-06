@@ -20,3 +20,4 @@ RUN yarn add typescript -D \
   && yarn add ts-jest -D \
   && yarn add @types/jest -D \
   && yarn add -D @babel/cli @babel/core @babel/node @babel/preset-env @babel/preset-typescript babel-plugin-module-resolver \
+  && yarn add sonar-scanner -D
