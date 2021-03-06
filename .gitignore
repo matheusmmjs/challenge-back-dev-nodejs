@@ -1,6 +1,5 @@
 mysql
 yarn.lock
-coverage
 
 # Logs
 logs
