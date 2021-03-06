@@ -7,6 +7,10 @@ services:
     image: node
     container_name: app
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
+    command: >
+      bash -c "yarn test
+      && yarn build
+      && yarn dev"
     networks:
       - node-network
     volumes:
