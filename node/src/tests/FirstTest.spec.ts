@@ -1,13 +1,7 @@
-import { User } from '@models/User';
-import { UsersController } from '@controllers/UsersController';
+import User from '@models/User';
 
 test('it should be ok', () => {
   const user = new User();
-  user.name = 'Matheus';
-  expect(user.name).toEqual('Matheus');
-});
-
-test('it should be ok 2', () => {
-  const userController = new UsersController();
-  expect(userController.test(1, 2)).toBe(3);
+  user.email = 'Matheus@123';
+  expect(user.email).toEqual('Matheus@123');
 });
