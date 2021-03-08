@@ -1,6 +1,8 @@
+import 'reflect-metadata';
 import express from 'express';
+
 import routes from './routes';
-import '@controllers/UsersController';
+import './database/connect';
 
 const app = express();
 

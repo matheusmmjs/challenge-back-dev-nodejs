@@ -19,5 +19,10 @@ RUN yarn add typescript -D \
   && yarn add jest -D \
   && yarn add ts-jest -D \
   && yarn add @types/jest -D \
-  && yarn add -D @babel/cli @babel/core @babel/node @babel/preset-env @babel/preset-typescript babel-plugin-module-resolver \
-  && yarn add sonar-scanner -D
+  #&& yarn add sonar-scanner -D \
+  && yarn add typeorm reflect-metadata \
+  && yarn add mysql \
+  && yarn add bcryptjs \
+  && yarn add @types/bcryptjs -D \
+  && yarn add jsonwebtoken \
+  && yarn add @types/jsonwebtoken -D
