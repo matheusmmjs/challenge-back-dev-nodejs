@@ -15,13 +15,19 @@ class AuthController {
     });
 
     if (!user) {
-      return res.sendStatus(401);
+      return res.status(401).json({
+        success: false,
+        message: 'User not exists',
+      });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.sendStatus(401);
+      return res.status(401).json({
+        success: false,
+        message: 'Password is not valid',
+      });
     }
 
     const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1d' });
@@ -29,6 +35,7 @@ class AuthController {
     delete user.password;
 
     return res.json({
+      success: true,
       user,
       token,
     });

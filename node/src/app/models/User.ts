@@ -27,6 +27,9 @@ class User {
   @Column()
   type: string;
 
+  @Column()
+  value: number;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword() {

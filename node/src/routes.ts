@@ -13,7 +13,7 @@ router.get('/users', UserController.indexAll);
 router.post('/auth', AuthController.authenticate);
 router.get('/auth', authMiddleware, UserController.index);
 
-router.post('/transfers', TransferController.store);
-router.get('/transfers', TransferController.index);
+router.post('/transfers', authMiddleware, TransferController.store);
+router.get('/transfers', authMiddleware, TransferController.index);
 
 export default router;

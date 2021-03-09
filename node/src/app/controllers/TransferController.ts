@@ -1,43 +1,53 @@
 import { Request, Response } from 'express';
 import { getConnection } from 'typeorm';
+import axios from 'axios';
 
 import Transfer from '@models/Transfer';
 import User from '@models/User';
 
 class TransferController {
   async index(req: Request, res: Response) {
-    // get a connection and create a new query runner
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
 
-    // establish real database connection using our new query runner
     await queryRunner.connect();
 
-    // we can also access entity manager that works with connection created by a query runner:
     const transfers = await queryRunner.manager.find(Transfer);
 
-    await queryRunner.release(); // release connection
+    await queryRunner.release();
 
-    return res.json(transfers);
+    return res.status(200).json({
+      success: true,
+      transfers,
+    });
   }
 
   async store(req: Request, res: Response) {
     const { value, payer, payee } = req.body;
 
-    // get a connection and create a new query runner
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
 
-    // establish real database connection using our new query runner
     await queryRunner.connect();
 
-    // we can also access entity manager that works with connection created by a query runner:
-    const user = await queryRunner.manager.findOne(User, {
+    const userPayer = await queryRunner.manager.findOne(User, {
       where: [{ id: payer }],
     });
 
-    if (user.type === 'L') {
-      return res.sendStatus(403);
+    const userPayee = await queryRunner.manager.findOne(User, {
+      where: [{ id: payee }],
+    });
+
+    if (userPayer.type === 'L') {
+      return res.status(403).json({
+        success: false,
+        message: 'User payer is logist',
+      });
+    } else if (userPayer.value < value) {
+      return res.status(403).json({
+        success: false,
+        message: 'User is not worth enough',
+      });
     }
 
     const transfer = new Transfer();
@@ -46,23 +56,54 @@ class TransferController {
     transfer.payer = payer;
     transfer.date = new Date();
 
-    // lets now open a new transaction:
     await queryRunner.startTransaction();
 
     try {
-      // execute some operations on this transaction:
       await queryRunner.manager.save(transfer);
 
-      // commit transaction now:
+      await queryRunner.manager.update(User, userPayer.id, {
+        value: userPayer.value - value,
+      });
+
+      await queryRunner.manager.update(User, userPayee.id, {
+        value: userPayee.value + value,
+      });
+
+      await axios
+        .get('https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6')
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          return res.status(401).json({
+            success: false,
+            message: 'Error external authorized service - ' + error,
+          });
+        });
+
       await queryRunner.commitTransaction();
     } catch (err) {
-      // since we have errors let's rollback changes we made
       await queryRunner.rollbackTransaction();
     } finally {
-      // you need to release query runner which is manually created:
+      await axios
+        .get('https://run.mocky.io/v3/b19f7b9f-9cbf-4fc6-ad22-dc30601aec04')
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          return res.status(401).json({
+            success: false,
+            message: 'Error notification service - ' + error,
+          });
+        });
+
       await queryRunner.release();
 
-      return res.json(transfer);
+      return res.status(200).json({
+        success: true,
+        message: 'Enviado',
+        transfer,
+      });
     }
   }
 }
