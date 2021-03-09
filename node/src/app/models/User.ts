@@ -32,6 +32,12 @@ class User {
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);
   }
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  toUpperCaseType() {
+    this.type = this.type.toUpperCase();
+  }
 }
 
 export default User;

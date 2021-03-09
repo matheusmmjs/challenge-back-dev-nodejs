@@ -8,6 +8,12 @@ class UserController {
     return res.send({ userId: req.userId });
   }
 
+  async indexAll(req: Request, res: Response) {
+    const repository = getRepository(User);
+    const users = await repository.find();
+    return res.json(users);
+  }
+
   async store(req: Request, res: Response) {
     const repository = getRepository(User);
     const { email, cpfCnpj, password, type, name } = req.body;
