@@ -48,11 +48,11 @@ Instale o docker-compose na máquina e execute o seguinte comando:
 
 Matheus Santos – [@matheusmmjs](https://www.linkedin.com/in/matheusmmjs) – matheusmatmac@hotmail.com
 
-[https://github.com/matheusmmjs/github-link](https://github.com/matheusmmjs/)
+[https://github.com/matheusmmjs](https://github.com/matheusmmjs/)
 
 ## Contribuindo
 
-1. Faça o _fork_ do projeto (<https://github.com/matheusmmjs/nodejs_backend/fork>)
+1. Faça o _fork_ do projeto (<https://github.com/matheusmmjs/challenge-back-dev-nodejs/fork>)
 2. Crie uma _branch_ para sua modificação
 3. Faça o _commit_
 4. _Push_
