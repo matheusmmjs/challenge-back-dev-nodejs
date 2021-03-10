@@ -15,7 +15,10 @@ export default function authMiddleware(
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.sendStatus(401);
+    return res.status(401).json({
+      success: false,
+      message: 'Authorization not declared',
+    });
   }
 
   const token = authorization.replace('Bearer', '').trim();
@@ -29,6 +32,9 @@ export default function authMiddleware(
 
     return next();
   } catch {
-    return res.sendStatus(401);
+    return res.status(401).json({
+      success: false,
+      message: 'Error verification token',
+    });
   }
 }

@@ -12,6 +12,7 @@ module.exports = {
   ],
   plugins: [
     [
+      '@babel/plugin-proposal-decorators',
       'module-resolver',
       {
         alias: {
