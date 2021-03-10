@@ -7,7 +7,7 @@ describe('POST /auth', () => {
     return request(ApiUrl)
       .post('/auth')
       .send({
-        email: 'matheusss1@123.com.br',
+        email: 'matheusss@123.com.br',
         password: '1234',
       })
       .expect(200)

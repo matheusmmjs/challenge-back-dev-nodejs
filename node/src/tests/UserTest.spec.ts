@@ -3,7 +3,7 @@ const ApiUrl = 'http://localhost:3000';
 
 describe('Get /auth', () => {
   const auth =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE1MjU3MTM2LCJleHAiOjE2MTUzNDM1MzZ9.nPyQFF6J2mKiksm32UwzqcnWLuF-tTeiQ1IJFsJnN3U';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE1MzM3ODEyLCJleHAiOjE2MTU0MjQyMTJ9.wE5OR73ej-93DXn2X_GNHAFJt5HHlmG9S81xvnkuMU8';
 
   it('should return 200 and check message success is true - index', () => {
     return request(ApiUrl)
@@ -33,8 +33,8 @@ describe('POST /users', () => {
       .post('/users')
       .send({
         name: 'matheus santos',
-        cpfCnpj: '12345678994444444444',
-        email: 'matheus@santosssssssssss.com.br',
+        cpfCnpj: '12345655487254',
+        email: 'matheus@santoooss.com.br',
         password: '1234',
         type: 'c',
         value: 500,
